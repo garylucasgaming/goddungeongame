@@ -4,10 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - GameManager
-  - PartyManager
-  - DungeonManager
-  - HasBranch
+  - Room
+  - Main Canvas
   layers:
   - Default
   - TransparentFX
@@ -17,7 +15,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - CameraCull
   - 
   - 
   - 
@@ -44,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: cameraCull
+    uniqueID: 3234601057
     locked: 0
