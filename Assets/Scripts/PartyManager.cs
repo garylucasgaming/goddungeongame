@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class PartyManager : MonoBehaviour
 {
-    public GameObject party;
+    #region Party Stats
+    public int partyAttack;
+    public int partyHealth;
+    #endregion
 
+    public GameObject partyDisplay;
+
+    #region Movement Vars
     public float partyMoveSpeed;
     public bool partyCanMove = false;
 
@@ -19,6 +25,7 @@ public class PartyManager : MonoBehaviour
     public bool goingBackwards = false;
     public bool inBranch;
     public bool branchEnded = false;
+    #endregion
 
     private void Start()
     {
@@ -36,15 +43,15 @@ public class PartyManager : MonoBehaviour
 
     private void MovePartyToCurrentWaypoint()
     {
-        party.transform.position = Vector2.MoveTowards(
-                party.transform.position,
+        partyDisplay.transform.position = Vector2.MoveTowards(
+                partyDisplay.transform.position,
                 currentWaypoint.position,
                 partyMoveSpeed * Time.deltaTime);
     }
 
     private void CheckDistanceToCurrentWaypoint()
     {
-        if (Vector2.Distance(party.transform.position, currentWaypoint.position) 
+        if (Vector2.Distance(partyDisplay.transform.position, currentWaypoint.position) 
             < waypointDetectionRange)
         {
             SetNextWaypoint();
