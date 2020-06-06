@@ -7,17 +7,24 @@ public class HeroPickerUI : MonoBehaviour
 {
 
     public GameObject hero;
-
+    public GameObject party;
+    public GameObject newHero;
+    public GameObject partyUI;
 
 
 
     private void Awake()
     {
 
-
-        transform.Find("HeroSprite").gameObject.GetComponent<SpriteRenderer>().sprite = hero.GetComponent<SpriteRenderer>().sprite;
-        transform.Find("HeroStats").gameObject.GetComponent<TextMeshPro>().text = GetHeroStats(hero);
-        transform.Find("HeroName").gameObject.GetComponent<TextMeshPro>().text = hero.GetComponent<Hero>().name;
+        party = GameObject.FindGameObjectWithTag("Party");
+        partyUI = GameObject.FindGameObjectWithTag("PartyUI");
+        newHero = Instantiate(hero);
+        newHero.transform.SetParent(transform);
+        transform.SetParent(GameObject.FindGameObjectWithTag("Main Canvas").transform);
+        transform.Find("HeroSprite").gameObject.GetComponent<SpriteRenderer>().sprite = newHero.GetComponent<Hero>().sprite;
+        
+        transform.Find("HeroStats").GetComponent<TextMeshProUGUI>().text = GetHeroStats(newHero);
+        transform.Find("HeroName").GetComponent<TextMeshProUGUI>().text = newHero.GetComponent<Hero>().heroName;
 
     }
 
@@ -27,8 +34,22 @@ public class HeroPickerUI : MonoBehaviour
         var nHero = targetHero.GetComponent<Hero>();
 
 
-        return "Health - " + nHero.health + " /n"
-            + "Damage - " + nHero.damage + " /n"
-            + "Ability - " + nHero.Ability;
+        return "Health - " + nHero.health + " \n"
+            + "Strength - " + nHero.strength + " \n"
+            + "Agility - " + nHero.agility + " \n"
+            + "Intelligence - " + nHero.intelligence;
+    }
+
+
+    public void updateUI() {
+        partyUI.gameObject.GetComponent<TownPartyUI>().UpdateUI();
+    }
+
+    public void AddHeroToParty()
+    {
+        
+        if (party.GetComponent<Party>().heroes.Count < 4) { party.GetComponent<Party>().AddToParty(newHero); }
+       
+
     }
 }
