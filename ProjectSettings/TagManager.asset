@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Room
   - Main Canvas
+  - Party
+  - PartyUI
+  - Menu
   layers:
   - Default
   - TransparentFX
